@@ -7,11 +7,30 @@
 (function(global, $){
 
     var codiad = global.codiad;
-
+    var mypath = codiad.active.getPath();
+ 
     $(window)
         .load(function() {
             codiad.filemanager.init();
         });
+
+  codiad.fvcs = {
+  
+  	
+
+	
+       
+        dialog: 'components/filemanager/fvcs.php',
+
+        save: function(mypath) {
+            // use codiad functions to load a dialog with 500px width and our example
+            codiad.modal.load(500, this.dialog + '?action=save&path=' + mypath);
+        },
+        
+        
+        
+        };
+
 
     codiad.filemanager = {
 
@@ -461,6 +480,10 @@
         //////////////////////////////////////////////////////////////////
 
         saveFile: function(path, content, callbacks) {
+            
+        	
+		
+             
             this.saveModifications(path, {content: content}, callbacks);
         },
 
