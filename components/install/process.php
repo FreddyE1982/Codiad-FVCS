@@ -83,6 +83,42 @@ if(!file_exists($users) && !file_exists($projects) && !file_exists($active)){
         $project_path = $project_name;
     }
     $timezone = $_POST['timezone'];
+    
+    
+    //////////////////////////////////////////////////////////////////
+    // Create Database Tables
+    //////////////////////////////////////////////////////////////////
+    
+    $dbcon = mysqli_connect($dbhost,$dbuser,$dbpw,$dbname );
+    
+    if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  exit("Something went wrong when trying to connect to the database. Please verify that you have entered your connection data correctly.");
+  }
+
+    
+        $dbcreate = "CREATE TABLE `RealNames` (
+      `ID` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(45) DEFAULT NULL,
+      `fullpath` varchar(100) DEFAULT NULL,
+      PRIMARY KEY (`ID`)
+    ) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+    
+    CREATE TABLE `versions` (
+      `realid` int(11) DEFAULT NULL,
+      `version` int(11) DEFAULT NULL,
+      `filenr` varchar(200) DEFAULT NULL,
+      `crdat` varchar(200) DEFAULT NULL
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+    
+    
+    mysqli_query($dbcon,$dbcreate);
+    
+    
+    
+    
+    
 
     //////////////////////////////////////////////////////////////////
     // Create Projects files
@@ -126,10 +162,13 @@ if(!file_exists($users) && !file_exists($projects) && !file_exists($active)){
 
     saveJSON($active,array(''));
     
-    //////////////////////////////////////////////////////////////////
+    
+        
+    
+      //////////////////////////////////////////////////////////////////
     // Create Config
     //////////////////////////////////////////////////////////////////
-
+    
 
     $config_data = '<?php
 
