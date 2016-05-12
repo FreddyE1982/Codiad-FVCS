@@ -72,6 +72,11 @@ if(!file_exists($users) && !file_exists($projects) && !file_exists($active)){
     $username = cleanUsername($_POST['username']);
     $password = encryptPassword($_POST['password']);
     $project_name = $_POST['project_name'];
+    $dbhost = $_POST['dbhost'];
+    $dbuser = $_POST['dbuser'];
+    $dbpw = $_POST["dbpassword"];
+    $dbname = $_POST["dbname"];
+    
     if(isset($_POST['project_path'])) {
         $project_path = $_POST['project_path'];
     } else {
@@ -158,6 +163,19 @@ date_default_timezone_set("' . $_POST['timezone'] . '");
 
 // External Authentification
 //define("AUTH_PATH", "/path/to/customauth.php");
+
+//////////////////////////////////////////////////////////////////
+// CONFIG FVCS
+//////////////////////////////////////////////////////////////////
+
+//DATABASE HOST ADRESS
+
+define("DBHOST", "' . $dbhost . '");
+define("DBDATABASE", "' . $dbname . '");
+define("DBUSER", "' . $dbuser . '");
+define("DBPASSWORD", "' . $dbpw . '");
+
+
 
 //////////////////////////////////////////////////////////////////
 // ** DO NOT EDIT CONFIG BELOW **
